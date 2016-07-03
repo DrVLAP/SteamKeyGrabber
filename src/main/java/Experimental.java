@@ -1,8 +1,10 @@
+import com.thoughtworks.selenium.webdriven.commands.Click;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -46,8 +48,8 @@ public class Experimental {
         System.out.println("Client's name - "+ botname);
         driver.findElement(By.id("LastName")).sendKeys(botlastname);
         System.out.println("Client's lastname - "+ botlastname);
-        //driver.findElement(By.id("GmailAddress")).sendKeys(botname, botlastname);
-        driver.findElement(By.id("GmailAddress")).sendKeys("dr.vlap");
+        driver.findElement(By.id("GmailAddress")).sendKeys(botname, botlastname);
+        //driver.findElement(By.id("GmailAddress")).sendKeys("dr.vlap");
         Thread.sleep(3000);
 
         driver.findElement(By.id("Passwd")).click();
@@ -56,7 +58,7 @@ public class Experimental {
         //Boolean suggestionshow = driver.findElements(By.id("username-suggestions")).size()>0;
         //Boolean suggestionshow = driver.findElements(By.id("username-suggestions")).;
         /*if (suggestionshow == true)*/
-        System.out.println ("Поиск элемента предложенных email на подъезде");
+        System.out.println ("Поиск элемента предложенных email");
         if (driver.findElement(By.id("username-suggestions")).isDisplayed())
             {
                 /*System.out.println ("Объект найден, поиск ");
@@ -64,9 +66,9 @@ public class Experimental {
                 String email = suggestions.get(0).getAttribute("href");*/
                 WebElement email = driver.findElement(By.xpath(".//*[@id='username-suggestions']/a[1]"));
                 //System.out.println (email.getAttribute("a"));
-                System.out.println(String.valueOf("Client's email - " + driver.findElement(By.xpath(".//*[@id='username-suggestions']/a[1]")).getText()) + "@gmail.com");
+                System.out.println(String.valueOf("Client's email: " + driver.findElement(By.xpath(".//*[@id='username-suggestions']/a[1]")).getText()) + "@gmail.com");
                 //System.out.println("Client's email - " + suggestions.get(0).getAttribute("href") + "@gmail.com");
-                Thread.sleep(3000);
+                //Thread.sleep(3000);
                 email.click();
                 //suggestions.get(0).click();
             }
@@ -74,18 +76,35 @@ public class Experimental {
             System.out.println("Client's email - " + botname + botlastname + "@gmail.com");
         }
         driver.findElement(By.id("Passwd")).sendKeys(password);
-        System.out.println(password);
+        System.out.println("Пароль клиента: " + password);
         driver.findElement(By.id("PasswdAgain")).sendKeys(password);
-        System.out.println(password);
-        //driver.get("http://steamunlock.com/index.php?do=register");
+        driver.findElement(By.id("day-label")).sendKeys(String.valueOf(random.nextInt(28)+1));
+        /*WebElement selectElem = driver.findElement(By.tagName("select"));
+        Select select = new Select(selectElem);*/
+        // следующая строка раскрывает выбор месяца рождения, она работает!
+        driver.findElement(By.id(":0")).click();
+        Thread.sleep(3000);
+        //.//*[@id='BirthMonth']/div[@id=':8']
+        //"//Select[@id='mySelectID']/option[normalize-space(text())='Option']")
+       // driver.findElement(By.className("goog-menuitem")).findElement(By.xpath(".//*[@id='BirthMonth']/div[@id=':8']")).click();
+        //Select listbox = new (driver.findElement(By.id(":0")));
+        //driver.findElement(B"июнь");
+        //driver.findElement(By.xpath(".//*[@id=':8']/div")).click();
 
+
+        //   findElement(By.id(String.valueOf((random.nextInt(12)+1))));
+        driver.findElement(By.id("BirthYear")).sendKeys(String.valueOf(random.nextInt(45)+1950));
+        //driver.get("http://steamunlock.com/index.php?do=register");
+        driver.findElement(By.id("submitbutton")).click();
     }
 
     @Test
     public void testRun () throws InterruptedException {
 
         registerclient();
-
+       /* for (int i=1; i<100; i++) {
+            System.out.println(String.valueOf(random.nextInt(45)+1950));
+        }*/
     }
 
     public void nameSelect(){
@@ -99,7 +118,7 @@ public class Experimental {
     public void passwordGen(){
         StringBuilder strBuilder = new StringBuilder();
 
-        for (int i = 0; i<6; i++) {
+        for (int i = 0; i<8; i++) {
             int number = random.nextInt(passChars.length());
             char ch = passChars.charAt(number);
             strBuilder.append(ch);
