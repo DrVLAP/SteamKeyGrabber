@@ -50,11 +50,11 @@ public class Experimental {
         System.out.println("Client's lastname - "+ botlastname);
         driver.findElement(By.id("GmailAddress")).sendKeys(botname, botlastname);
         //driver.findElement(By.id("GmailAddress")).sendKeys("dr.vlap");
-        Thread.sleep(3000);
+        Thread.sleep(500);
 
         driver.findElement(By.id("Passwd")).click();
         //jse.executeScript("document.getElementById('username-suggestions').focus();");
-        Thread.sleep(3000);
+        Thread.sleep(500);
         //Boolean suggestionshow = driver.findElements(By.id("username-suggestions")).size()>0;
         //Boolean suggestionshow = driver.findElements(By.id("username-suggestions")).;
         /*if (suggestionshow == true)*/
@@ -82,21 +82,32 @@ public class Experimental {
         /*WebElement selectElem = driver.findElement(By.tagName("select"));
         Select select = new Select(selectElem);*/
         // следующая строка раскрывает выбор месяца рождения, она работает!
-        driver.findElement(By.id(":0")).click();
-        Thread.sleep(3000);
+        //driver.findElement(By.id(":0")).click();
+        Thread.sleep(500);
         //.//*[@id='BirthMonth']/div[@id=':8']
         //"//Select[@id='mySelectID']/option[normalize-space(text())='Option']")
        // driver.findElement(By.className("goog-menuitem")).findElement(By.xpath(".//*[@id='BirthMonth']/div[@id=':8']")).click();
         //Select listbox = new (driver.findElement(By.id(":0")));
         //driver.findElement(B"июнь");
-        //driver.findElement(By.xpath(".//*[@id=':8']/div")).click();
+        //driver.findElement(By.xpath(".//*[@id='BirthMonth']")).click();
+        //Этот кусок кода я взял с какого-то бложика. ЭТО решение не работает.
+        driver.findElement(By.xpath(".//*[@id='BirthMonth']/div")).click();
+        driver.findElement(By.xpath(".//*[@id='BirthMonth']/div[2]/div[@id=':5']")).click();
+        System.out.println("Раскрыл выбор месяца, выбираю месяц");
+        Thread.sleep(500);
 
-
+        //driver.findElement(By.xpath(".//*[@id='BirthMonth']/div[2]/div[@id=':5']")).click();
+        //.//*[@id=':8']
         //   findElement(By.id(String.valueOf((random.nextInt(12)+1))));
         driver.findElement(By.id("BirthYear")).sendKeys(String.valueOf(random.nextInt(45)+1950));
+        //Это тоже с того блога. И тоже не работает
+        driver.findElement(By.xpath(".//*[@id='Gender']/div")).click();
+        driver.findElement(By.xpath(".//*[@id='Gender']/div[2]/div[@id=':d']")).click();
         //driver.get("http://steamunlock.com/index.php?do=register");
-        driver.findElement(By.id("submitbutton")).click();
+        //driver.findElement(By.id("submitbutton")).click();
     }
+    //.//*[@id=':8']
+    // <div class="goog-menuitem-content">июль</div>
 
     @Test
     public void testRun () throws InterruptedException {
