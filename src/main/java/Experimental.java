@@ -1,8 +1,5 @@
 import com.thoughtworks.selenium.webdriven.commands.Click;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
@@ -82,7 +79,8 @@ public class Experimental {
         /*WebElement selectElem = driver.findElement(By.tagName("select"));
         Select select = new Select(selectElem);*/
         // следующая строка раскрывает выбор месяца рождения, она работает!
-        //driver.findElement(By.id(":0")).click();
+
+        driver.findElement(By.id(":0")).click();
         Thread.sleep(500);
         //.//*[@id='BirthMonth']/div[@id=':8']
         //"//Select[@id='mySelectID']/option[normalize-space(text())='Option']")
@@ -91,10 +89,12 @@ public class Experimental {
         //driver.findElement(B"июнь");
         //driver.findElement(By.xpath(".//*[@id='BirthMonth']")).click();
         //Этот кусок кода я взял с какого-то бложика. ЭТО решение не работает.
-        driver.findElement(By.xpath(".//*[@id='BirthMonth']/div")).click();
-        driver.findElement(By.xpath(".//*[@id='BirthMonth']/div[2]/div[@id=':5']")).click();
+        /*driver.findElement(By.xpath(".//*[@id='BirthMonth']/div")).click();
+        driver.findElement(By.xpath(".//*[@id='BirthMonth']/div[2]/div[@id=':5']")).click();*/
+        driver.findElement(By.xpath("//*[@id='BirthMonth']/div[2]/div[@id=':5']")).click();
+        //driver.findElement(By.xpath("//*[@id=':f']/div")).sendKeys(Keys.ENTER);
         System.out.println("Раскрыл выбор месяца, выбираю месяц");
-        Thread.sleep(500);
+        Thread.sleep(3000);
 
         //driver.findElement(By.xpath(".//*[@id='BirthMonth']/div[2]/div[@id=':5']")).click();
         //.//*[@id=':8']
@@ -102,7 +102,7 @@ public class Experimental {
         driver.findElement(By.id("BirthYear")).sendKeys(String.valueOf(random.nextInt(45)+1950));
         //Это тоже с того блога. И тоже не работает
         driver.findElement(By.xpath(".//*[@id='Gender']/div")).click();
-        driver.findElement(By.xpath(".//*[@id='Gender']/div[2]/div[@id=':d']")).click();
+        //driver.findElement(By.xpath(".//*[@id='Gender']/div[2]/div[@id=':d']")).click();
         //driver.get("http://steamunlock.com/index.php?do=register");
         //driver.findElement(By.id("submitbutton")).click();
     }
